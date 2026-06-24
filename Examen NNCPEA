@@ -1,0 +1,659 @@
+<!DOCTYPE html>
+
+<html lang="es">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>NutriMaster 100 - Preparación Extrema</title>
+
+<style>
+
+*{
+
+margin:0;
+
+padding:0;
+
+box-sizing:border-box;
+
+font-family:Inter,Arial,sans-serif;
+
+}
+
+body{
+
+background:#0f172a;
+
+color:white;
+
+}
+
+header{
+
+padding:30px;
+
+background:#111827;
+
+border-bottom:1px solid #334155;
+
+}
+
+header h1{
+
+font-size:32px;
+
+}
+
+header p{
+
+opacity:.8;
+
+margin-top:10px;
+
+}
+
+.container{
+
+width:95%;
+
+max-width:1400px;
+
+margin:auto;
+
+padding:20px;
+
+}
+
+.grid{
+
+display:grid;
+
+grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+
+gap:20px;
+
+}
+
+.card{
+
+background:#1e293b;
+
+padding:20px;
+
+border-radius:15px;
+
+box-shadow:0 0 15px rgba(0,0,0,.2);
+
+}
+
+.card h2{
+
+margin-bottom:15px;
+
+}
+
+.metric{
+
+font-size:36px;
+
+font-weight:bold;
+
+margin-top:10px;
+
+}
+
+.section{
+
+margin-top:30px;
+
+}
+
+button{
+
+background:#2563eb;
+
+border:none;
+
+padding:12px 20px;
+
+border-radius:10px;
+
+color:white;
+
+cursor:pointer;
+
+font-weight:bold;
+
+}
+
+button:hover{
+
+opacity:.9;
+
+}
+
+.flashcard{
+
+height:180px;
+
+display:flex;
+
+justify-content:center;
+
+align-items:center;
+
+text-align:center;
+
+cursor:pointer;
+
+font-size:20px;
+
+padding:20px;
+
+}
+
+.predict-item{
+
+padding:10px;
+
+margin-top:10px;
+
+background:#334155;
+
+border-radius:10px;
+
+}
+
+.question{
+
+margin-top:15px;
+
+padding:15px;
+
+background:#334155;
+
+border-radius:10px;
+
+}
+
+.option{
+
+display:block;
+
+margin-top:8px;
+
+padding:10px;
+
+background:#475569;
+
+border-radius:8px;
+
+cursor:pointer;
+
+}
+
+.option:hover{
+
+background:#64748b;
+
+}
+
+input{
+
+width:100%;
+
+padding:10px;
+
+border:none;
+
+border-radius:8px;
+
+margin-top:10px;
+
+}
+
+.result{
+
+margin-top:15px;
+
+font-weight:bold;
+
+font-size:18px;
+
+}
+
+.progressBar{
+
+height:25px;
+
+background:#334155;
+
+border-radius:50px;
+
+overflow:hidden;
+
+}
+
+.progressFill{
+
+height:100%;
+
+width:0%;
+
+background:#22c55e;
+
+transition:.5s;
+
+}
+
+.correct{
+
+background:#16a34a !important;
+
+}
+
+.wrong{
+
+background:#dc2626 !important;
+
+}
+
+nav{
+
+position:sticky;
+
+top:0;
+
+background:#111827;
+
+padding:15px;
+
+z-index:999;
+
+display:flex;
+
+gap:10px;
+
+flex-wrap:wrap;
+
+border-bottom:1px solid #334155;
+
+}
+
+nav a{
+
+color:white;
+
+text-decoration:none;
+
+padding:8px 15px;
+
+background:#1e293b;
+
+border-radius:8px;
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<nav>
+
+<a href="#dashboard">Dashboard</a>
+
+<a href="#predictor">Predictor</a>
+
+<a href="#flashcards">Flashcards</a>
+
+<a href="#calculadoras">Calculadoras</a>
+
+<a href="#simulador">Simulador</a>
+
+</nav>
+
+<header>
+
+<h1>NutriMaster 100</h1>
+
+<p>Preparación extrema para Nutrición Pediátrica y Soporte Nutricional</p>
+
+</header>
+
+<div class="container">
+
+<section id="dashboard" class="section">
+
+<div class="grid">
+
+<div class="card">
+
+<h2>Preguntas Respondidas</h2>
+
+<div id="answered" class="metric">0</div>
+
+</div>
+
+<div class="card">
+
+<h2>Correctas</h2>
+
+<div id="correct" class="metric">0</div>
+
+</div>
+
+<div class="card">
+
+<h2>Precisión</h2>
+
+<div id="accuracy" class="metric">0%</div>
+
+</div>
+
+</div>
+
+<div style="margin-top:20px;">
+
+<div class="progressBar">
+
+<div class="progressFill" id="progressFill"></div>
+
+</div>
+
+</div>
+
+</section>
+
+<section id="predictor" class="section">
+
+<div class="card">
+
+<h2>Preguntas con Mayor Probabilidad de Salir</h2>
+
+<div class="predict-item">
+
+🔥 98% Micronutrientes en Adolescencia
+
+</div>
+
+<div class="predict-item">
+
+🔥 97% Obesidad Infantil y Síndrome Metabólico
+
+</div>
+
+<div class="predict-item">
+
+🔥 96% Desnutrición Crónica vs Aguda
+
+</div>
+
+<div class="predict-item">
+
+🔥 95% Nutrición Enteral
+
+</div>
+
+<div class="predict-item">
+
+🔥 94% GEB Adolescente
+
+</div>
+
+<div class="predict-item">
+
+🔥 93% TCA y Síndrome de Realimentación
+
+</div>
+
+</div>
+
+</section>
+
+<section id="flashcards" class="section">
+
+<div class="card">
+
+<h2>Flashcards</h2>
+
+<div class="flashcard" id="flashcard">
+
+Presione para comenzar
+
+</div>
+
+<button onclick="nextCard()">Siguiente</button>
+
+</div>
+
+</section>
+
+<section id="calculadoras" class="section">
+
+<div class="grid">
+
+<div class="card">
+
+<h2>Calculadora GEB Adolescente</h2>
+
+<input id="pesoGEB" type="number" placeholder="Peso kg">
+
+<select id="sexoGEB" style="width:100%;padding:10px;margin-top:10px;">
+
+<option value="m">Masculino</option>
+
+<option value="f">Femenino</option>
+
+</select>
+
+<button onclick="calcGEB()">Calcular</button>
+
+<div class="result" id="gebResult"></div>
+
+</div>
+
+<div class="card">
+
+<h2>Requerimiento Hídrico</h2>
+
+<input id="pesoHid" type="number" placeholder="Peso kg">
+
+<button onclick="calcHydration()">Calcular</button>
+
+<div class="result" id="hydResult"></div>
+
+</div>
+
+</div>
+
+</section>
+
+<section id="simulador" class="section">
+
+<div class="card">
+
+<h2>Simulador Estilo Profesora</h2>
+
+<div id="quizContainer"></div>
+
+<button onclick="loadQuestion()">Nueva Pregunta</button>
+
+</div>
+
+</section>
+
+</div>
+
+<script>
+
+let stats={
+
+answered:localStorage.getItem("answered")||0,
+
+correct:localStorage.getItem("correct")||0
+
+};
+
+updateDashboard();
+
+function updateDashboard(){
+
+document.getElementById("answered").innerText=stats.answered;
+
+document.getElementById("correct").innerText=stats.correct;
+
+let acc=0;
+
+if(stats.answered>0){
+
+acc=((stats.correct/stats.answered)*100).toFixed(1);
+
+}
+
+document.getElementById("accuracy").innerText=acc+"%";
+
+document.getElementById("progressFill").style.width=acc+"%";
+
+localStorage.setItem("answered",stats.answered);
+
+localStorage.setItem("correct",stats.correct);
+
+}
+
+const flashcards=[
+
+{
+
+q:"Micronutrientes clave en adolescencia",
+
+a:"Hierro, Calcio, Vitamina D y Zinc"
+
+},
+
+{
+
+q:"Indicador nutricional en adolescentes",
+
+a:"IMC para la edad"
+
+},
+
+{
+
+q:"Complicación metabólica de obesidad infantil",
+
+a:"Resistencia a la insulina"
+
+},
+
+{
+
+q:"Complicación más temida de realimentación",
+
+a:"Hipofosfatemia"
+
+},
+
+{
+
+q:"Desnutrición por talla baja prolongada",
+
+a:"Desnutrición crónica"
+
+}
+
+];
+
+let cardIndex=0;
+
+let showingAnswer=false;
+
+const flash=document.getElementById("flashcard");
+
+flash.onclick=function(){
+
+if(!showingAnswer){
+
+flash.innerHTML=flashcards[cardIndex].a;
+
+showingAnswer=true;
+
+}
+
+}
+
+function nextCard(){
+
+cardIndex++;
+
+if(cardIndex>=flashcards.length){
+
+cardIndex=0;
+
+}
+
+showingAnswer=false;
+
+flash.innerHTML=flashcards[cardIndex].q;
+
+}
+
+function calcGEB(){
+
+let peso=parseFloat(document.getElementById("pesoGEB").value);
+
+let sexo=document.getElementById("sexoGEB").value;
+
+let geb=0;
+
+if(sexo==="m"){
+
+geb=(17.5*peso)+651;
+
+}
+
+else{
+
+geb=(12.2*peso)+746;
+
+}
+
+document.getElementById("gebResult").innerHTML=
+
+"GEB = "+geb.toFixed(0)+" kcal/día";
+
+}
+
+function calcHydration(){
+
+let peso=parseFloat(document.getElementById("pesoHid").value);
+
+let total=0;
+
+if(peso<=10){
+
+total=peso*100;
+
+}
+
+else if(peso<=20){
+
+total=1000+((peso-10)*50);
+
+}
+
+else{
+
+total=1500+((peso-20)*20);
+
+}
+
+document.getElementById("hydResult").innerHTML=
+
+total+" mL/día";
